@@ -146,7 +146,7 @@
       margin-left: 4px;
     }
 
-    /* main hero */
+    /* hero */
     .hero-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -215,7 +215,7 @@
       color: #0b0e14;
     }
 
-    /* rotating portrait with kenyan flag */
+    /* rotating portrait with kenyan flag overlay */
     .portrait-wrapper {
       display: flex;
       justify-content: center;
@@ -246,16 +246,17 @@
       object-fit: cover;
       border-radius: 50%;
       box-shadow: inset 0 0 0 2px rgba(255,215,0,0.3);
+      z-index: 2;
+      position: relative;
     }
-    /* kenyan flag overlay on rotation */
+    /* kenyan flag overlay – rotating colours */
     .flag-overlay {
       position: absolute;
-      inset: 0;
+      inset: -6px;
       border-radius: 50%;
       pointer-events: none;
       mix-blend-mode: overlay;
-      opacity: 0.5;
-      animation: flagColors 4s ease-in-out infinite alternate;
+      opacity: 0.7;
       background: repeating-conic-gradient(
         #000000 0% 10%, 
         #ff0000 10% 20%, 
@@ -268,13 +269,15 @@
         #000000 80% 90%, 
         #ff0000 90% 100%
       );
-      background-size: 200% 200%;
-      animation: flagShift 5s linear infinite alternate;
+      background-size: 300% 300%;
+      animation: flagShift 4s ease-in-out infinite alternate;
       border-radius: 50%;
+      z-index: 1;
     }
     @keyframes flagShift {
-      0% { background-position: 0% 0%; opacity: 0.3; }
-      100% { background-position: 100% 100%; opacity: 0.6; }
+      0% { background-position: 0% 0%; transform: rotate(0deg) scale(1.0); opacity: 0.5; }
+      50% { background-position: 100% 100%; transform: rotate(60deg) scale(1.2); opacity: 0.8; }
+      100% { background-position: 0% 100%; transform: rotate(-30deg) scale(0.9); opacity: 0.6; }
     }
 
     /* sections */
@@ -301,51 +304,26 @@
       background-clip: text;
     }
 
-    /* projects grid */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.5rem;
-    }
-    .project-tile {
-      background: rgba(255,255,255,0.03);
-      border-radius: 24px;
-      padding: 1.5rem;
-      border: 1px solid rgba(255,215,0,0.1);
-      transition: 0.25s;
-      backdrop-filter: blur(4px);
+    /* projects — single button to GitHub */
+    .projects-single-btn {
       display: flex;
       flex-direction: column;
-      gap: 0.6rem;
-    }
-    .project-tile:hover {
-      transform: translateY(-5px);
-      border-color: #facc15;
-      box-shadow: 0 12px 30px rgba(250,204,21,0.08);
-    }
-    .project-tile h3 {
-      font-size: 1.3rem;
-      color: #facc15;
-    }
-    .project-tile p {
-      color: #94a3b8;
-      font-size: 0.95rem;
-      line-height: 1.4;
-    }
-    .project-link {
-      color: #38bdf8;
-      text-decoration: none;
-      font-weight: 500;
-      display: inline-flex;
       align-items: center;
-      gap: 5px;
-      margin-top: 6px;
+      gap: 1rem;
+      padding: 1rem 0;
     }
-    .project-link i {
-      font-size: 0.9rem;
+    .projects-single-btn .btn {
+      font-size: 1.3rem;
+      padding: 1rem 3rem;
+      background: linear-gradient(135deg, #facc15, #f472b6);
+      box-shadow: 0 0 30px rgba(250,204,21,0.2);
     }
-    .project-link:hover {
-      color: #facc15;
+    .projects-single-btn .btn i {
+      font-size: 1.6rem;
+    }
+    .projects-single-btn p {
+      color: #94a3b8;
+      font-size: 1rem;
     }
 
     /* skills */
@@ -494,35 +472,21 @@
       </div>
       <div class="portrait-wrapper">
         <div class="portrait-card">
-          <!-- placeholder image – use a real img if available -->
+          <!-- placeholder image – using UI avatars with name -->
           <img src="https://ui-avatars.com/api/?name=PK+Driller&background=facc15&color=0b0e14&size=200&bold=true" alt="PK Driller portrait">
           <div class="flag-overlay"></div>
         </div>
       </div>
     </div>
 
-    <!-- projects section -->
+    <!-- projects section – single button to GitHub -->
     <section class="section-card" id="projects">
       <h2 class="section-title"><i class="fas fa-project-diagram"></i> Projects</h2>
-      <div class="projects-grid">
-        <div class="project-tile">
-          <h3>🌐 Portfolio V2</h3>
-          <p>Modern live portfolio with dynamic stats, rotating portrait & Kenyan flag vibe.</p>
-          <a href="#" class="project-link" target="_blank">Live Demo <i class="fas fa-arrow-right"></i></a>
-        </div>
-        <div class="project-tile">
-          <h3>🤖 Telegram Bot</h3>
-          <p>Automated bot for dev community — with games, utilities & fun.</p>
-          <a href="https://t.me/dev_pkdrillerbot" class="project-link" target="_blank">Visit Bot <i class="fas fa-arrow-right"></i></a>
-        </div>
-        <div class="project-tile">
-          <h3>📊 Web Tools</h3>
-          <p>Collection of mini web apps: weather, QR, converters & more.</p>
-          <a href="#" class="project-link" target="_blank">Explore <i class="fas fa-arrow-right"></i></a>
-        </div>
-      </div>
-      <div style="margin-top: 1.2rem; text-align: right;">
-        <a href="https://ww-pkdriller-orpin.vercel.app/" target="_blank" class="btn" style="background: linear-gradient(135deg,#3b82f6,#8b5cf6);"><i class="fas fa-globe"></i> Full Portfolio Site</a>
+      <div class="projects-single-btn">
+        <p><i class="fas fa-github" style="color: #facc15;"></i> All my projects are on GitHub – click below to explore</p>
+        <a href="https://github.com/officialpkdriller?tab=repositories" target="_blank" class="btn">
+          <i class="fab fa-github"></i> View on GitHub
+        </a>
       </div>
     </section>
 
@@ -540,6 +504,8 @@
         <span class="skill-pill">Telegram APIs</span>
         <span class="skill-pill">Automation</span>
         <span class="skill-pill">HTML5/CSS3</span>
+        <span class="skill-pill">REST APIs</span>
+        <span class="skill-pill">Vercel</span>
       </div>
     </section>
 
@@ -547,8 +513,9 @@
     <section class="section-card" id="about">
       <h2 class="section-title"><i class="fas fa-user-astronaut"></i> About</h2>
       <div class="about-text">
-        <p><strong>👋 I'm Benard Wachira (PK Driller)</strong> – a passionate developer and tech explorer from Kenya. I build web apps, bots, and creative tools that solve real problems. I believe in bold ideas, bright colors, and code that tells a story. When I'm not coding, I'm sharing knowledge and connecting with fellow makers.</p>
+        <p><strong>👋 I'm Benard Wachira (PK Driller)</strong> – a passionate developer and tech explorer from Kenya. I build web apps, bots, and creative tools that solve real problems. I believe in bold ideas, bright colours, and code that tells a story. When I'm not coding, I'm sharing knowledge and connecting with fellow makers.</p>
         <p style="margin-top: 0.6rem;"><i class="fas fa-heart" style="color: #f472b6;"></i> Let's build something memorable together.</p>
+        <p style="margin-top: 0.4rem; font-size: 0.9rem; color: #94a3b8;"><i class="fas fa-flag" style="color: #facc15;"></i> Proudly Kenyan · 🇰🇪</p>
       </div>
     </section>
 
@@ -624,12 +591,8 @@
         document.getElementById('locationDisplay').textContent = 'Kenya 🇰🇪';
       }
 
-      // ----- 3. extra: rotating portrait already via CSS, flag overlay active -----
-
-      // ----- 4. projects: add live demo link (the 'Visit Website' from project card) -----
-      // we have a full portfolio link already
-
-      // also update any static text: all good
+      // ----- 3. portrait rotation + flag overlay: all in CSS -----
+      // everything is handled by CSS animations (rotatePortrait + flagShift)
     })();
   </script>
 </body>
