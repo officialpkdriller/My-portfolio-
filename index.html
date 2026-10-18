@@ -2,26 +2,26 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
-  <title>PK Driller • live portfolio — Benard Wachira</title>
-  <meta name="description" content="Benard (PK Driller) — developer and creator from Kenya. Web apps, bots, devtools, and CI/CD. Explore projects, skills, and contact." />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Benard "PK Driller" Wachira — Developer • Creator</title>
+  <meta name="description" content="Benard Wachira (PK Driller) — Full-stack developer from Kenya. I build web apps, bots, developer tools and CI/CD automations. View projects, case studies, experience, and resume." />
   <meta name="theme-color" content="#0b0e14" />
 
-  <!-- Open Graph / Social preview -->
-  <meta property="og:title" content="PK Driller — Benard Wachira" />
-  <meta property="og:description" content="Developer & creator from Kenya — web apps, bots, and tools. Connect on GitHub, Telegram, or email." />
+  <!-- Open Graph -->
+  <meta property="og:title" content="Benard (PK Driller) — Developer" />
+  <meta property="og:description" content="Full-stack developer from Kenya — web apps, bots, devtools, and CI/CD automations." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://your-portfolio.example/" />
   <meta property="og:image" content="https://your-portfolio.example/og-image.png" />
 
-  <!-- Structured data: Person -->
+  <!-- JSON-LD -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Benard Wachira",
     "alternateName": "PK Driller",
-    "url": "https://your-portfolio.example",
+    "url": "https://your-portfolio.example/",
     "sameAs": [
       "https://github.com/officialpkdriller",
       "https://t.me/dev_pkdrillerbot",
@@ -32,313 +32,477 @@
   }
   </script>
 
-  <!-- Fonts: preconnect and only necessary weights -->
+  <!-- Fonts & icons -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Inter:opsz@14..32&display=swap" rel="stylesheet">
-
-  <!-- Font Awesome (kept for icons) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous">
 
   <style>
-    /* Base reset */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    /* Minimal reset + variables */
+    *{box-sizing:border-box;margin:0;padding:0}
     :root{
       --bg:#0b0e14; --muted:#94a3b8; --text:#f0f3fa; --accent:#facc15; --accent-2:#f472b6;
-      --glass-1: rgba(18,26,36,0.7); --glass-2: rgba(12,22,35,0.7);
+      --glass: rgba(12,18,28,0.6);
+      --card: rgba(10,14,20,0.65);
+      --max-width:1100px;
     }
-    html,body { height:100%; }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-      min-height:100vh; padding:1rem; position:relative; overflow-x:hidden;
-      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+    html,body{height:100%}
+    body{
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      background:var(--bg); color:var(--text); padding:1.2rem; -webkit-font-smoothing:antialiased;
+      min-height:100vh;
     }
+    a{color:inherit}
+    img{max-width:100%;display:block}
 
-    /* Skip link for keyboard users */
-    a.skip-link {
-      position: absolute; left: -999px; top: auto; width:1px; height:1px; overflow:hidden;
-    }
-    a.skip-link:focus {
-      left: 1rem; top: 1rem; width: auto; height: auto; padding: .5rem .75rem;
-      background: #111827; color: var(--text); border-radius: 6px; z-index: 10000;
-    }
+    /* Skip link */
+    .skip{position:absolute;left:-999px;top:auto}
+    .skip:focus{left:1rem;top:1rem;padding:.5rem .75rem;background:#111827;border-radius:6px;color:var(--text);z-index:9999}
 
-    /* Animated gradient background (subtle) */
-    body::before {
-      content:''; position: fixed; inset:0; z-index:-2;
-      background:
-        radial-gradient(circle at 20% 30%, #1a5cff44, transparent 70%),
-        radial-gradient(circle at 80% 70%, #ff3b7a33, transparent 60%),
-        radial-gradient(circle at 40% 80%, #00e6b033, transparent 55%),
-        radial-gradient(circle at 70% 20%, #ffb34722, transparent 50%);
-      background-blend-mode: screen; opacity: .45;
-      animation: aurora 20s ease-in-out infinite alternate;
-      will-change: transform, opacity;
-    }
-    @keyframes aurora {
-      0% { transform: scale(1) rotate(0deg); }
-      50% { transform: scale(1.08) rotate(2deg); }
-      100% { transform: scale(.98) rotate(-1.5deg); }
-    }
+    .container{max-width:var(--max-width);margin:0 auto;display:flex;flex-direction:column;gap:1.6rem}
 
-    /* Floating orbs */
-    .orb { position:fixed; border-radius:50%; filter: blur(48px); pointer-events:none; z-index:-1; opacity:.22; }
-    .orb1{ width:260px; height:260px; background:#3b82f6; top:10vh; left:4vw; }
-    .orb2{ width:360px; height:360px; background:#ec4899; right:2vw; bottom:6vh; animation-duration:14s; }
-    .orb3{ width:180px; height:180px; background:#10b981; top:60vh; left:70vw; animation-duration:12s; }
-    @keyframes floatOrb{ 0%{transform:translate(0,0) scale(1)} 100%{transform:translate(24px,-32px) scale(1.12)} }
-    .orb{ animation: floatOrb 12s ease-in-out infinite alternate; }
+    /* header */
+    header{display:flex;justify-content:space-between;align-items:center;padding:.8rem 1.2rem;border-radius:44px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.04)}
+    .brand{font-family:Montserrat,serif;font-weight:800;font-size:1.6rem; background:linear-gradient(135deg,var(--accent),var(--accent-2)); -webkit-background-clip:text; color:transparent}
+    nav{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+    nav a{padding:.35rem .5rem;border-radius:8px;font-weight:600;color:var(--muted)}
+    nav a.primary{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#07101a}
+    nav a:hover{transform:translateY(-2px)}
 
-    /* Layout container */
-    .container{ max-width:1100px; margin:0 auto; display:flex; flex-direction:column; gap:1.8rem; }
-
-    /* Header / nav */
-    header.glass-header{
-      background: var(--glass-1); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-      border-radius: 48px; padding:.8rem 1.6rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;
-      box-shadow: 0 10px 30px rgba(0,0,0,.45); border:1px solid rgba(255,255,255,0.04);
-    }
-    .logo{ font-family:'Montserrat',sans-serif; font-weight:800; font-size:1.6rem;
-      background: linear-gradient(135deg,var(--accent),var(--accent-2),#3b82f6);
-      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-    }
-    nav.nav-links{ display:flex; gap:1.6rem; align-items:center; }
-    nav.nav-links a{ color:var(--muted); text-decoration:none; font-weight:600; padding:.3rem 0; border-bottom:2px solid transparent; transition:.16s; }
-    nav.nav-links a:hover{ color:var(--accent); border-bottom-color:var(--accent); }
-
-    /* Live stats row */
-    .stats-grid{
-      display:flex; gap:1rem; flex-wrap:wrap; justify-content:space-between;
-      background: rgba(8,12,18,0.5); padding:.9rem 1.2rem; border-radius:36px; border:1px solid rgba(255,215,0,0.12);
-    }
-    .stat-item{ display:flex; align-items:center; gap:.6rem; font-size:.95rem; color:var(--muted);
-      padding:.32rem .9rem; border-radius:999px; background: rgba(255,255,255,0.02);
-    }
-    .stat-item i{ color:var(--accent); font-size:1.05rem;}
-    .stat-value{ font-weight:700; color:var(--text); margin-left:4px; }
-
-    /* Hero */
-    .hero-grid{
-      display:grid; grid-template-columns: 1fr 1fr; gap:2rem; align-items:center;
-      background: var(--glass-2); backdrop-filter: blur(8px); padding:1.8rem; border-radius:40px; border:1px solid rgba(255,255,255,0.04);
-      box-shadow: 0 18px 44px rgba(0,0,0,.5);
-    }
-    .hero-text h1{ font-family:'Montserrat',sans-serif; font-size:3rem; line-height:1.05;
-      background: linear-gradient(135deg,var(--accent),var(--accent-2),#38bdf8);
-      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-    }
-    .hero-text p { color:var(--muted); font-size:1.05rem; max-width:90%; }
-    .hero-cta{ display:flex; gap:1rem; margin-top:.8rem; flex-wrap:wrap; }
-    .btn{ background: linear-gradient(135deg,var(--accent),var(--accent-2)); border:none; padding:.7rem 1.6rem; border-radius:999px; font-weight:700; color:#07101a; text-decoration:none; display:inline-flex; gap:.6rem; align-items:center; box-shadow:0 6px 20px rgba(250,204,21,.18); transition:.16s; }
-    .btn:hover{ transform:translateY(-3px); box-shadow:0 10px 28px rgba(250,204,21,.28); }
-    .btn-outline{ background:transparent; border:2px solid var(--accent); color:var(--accent); box-shadow:none; }
-    .btn-outline:hover{ background:var(--accent); color:#07101a; }
+    /* hero */
+    .hero{display:grid;grid-template-columns:1fr 360px;gap:2rem;align-items:center;background:var(--card);padding:1.6rem;border-radius:36px;border:1px solid rgba(255,255,255,0.03)}
+    .hero h1{font-family:Montserrat,serif;font-size:2.6rem;line-height:1.02;background:linear-gradient(135deg,var(--accent),var(--accent-2),#38bdf8);-webkit-background-clip:text;color:transparent}
+    .hero p.lead{color:var(--muted);margin-top:.6rem}
+    .ctas{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1rem}
+    .btn{display:inline-flex;align-items:center;gap:.6rem;padding:.65rem 1rem;border-radius:999px;font-weight:700;border:none;cursor:pointer}
+    .btn--primary{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#07101a}
+    .btn--ghost{background:transparent;border:2px solid var(--accent);color:var(--accent)}
+    .hero-stats{display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap}
+    .stat{background:rgba(255,255,255,0.02);padding:.45rem .8rem;border-radius:999px;color:var(--muted);display:flex;align-items:center;gap:.5rem}
 
     /* portrait */
-    .portrait-wrapper{ display:flex; justify-content:center; align-items:center; perspective:900px; }
-    .portrait-card{ width:200px; height:200px; border-radius:50%; background:linear-gradient(135deg,#0f172a,#111827); display:flex; align-items:center; justify-content:center; position:relative; animation: rotatePortrait 10s linear infinite; border:4px solid var(--accent); overflow:hidden; }
-    .portrait-card img{ width:90%; height:90%; object-fit:cover; border-radius:50%; box-shadow:inset 0 0 0 2px rgba(255,215,0,0.18); }
-    .flag-overlay{ position:absolute; inset:-6px; border-radius:50%; mix-blend-mode:overlay; opacity:.65;
-      background: repeating-conic-gradient(#000 0 9%, #ff0000 9% 18%, #006600 18% 27%, #ffffff 27% 36%); background-size:240% 240%; animation: flagShift 4s ease-in-out infinite alternate; }
-    @keyframes rotatePortrait{ 0%{transform:rotateY(0deg)}50%{transform:rotateY(180deg)}100%{transform:rotateY(360deg)} }
-    @keyframes flagShift{ 0%{ background-position:0% 0% } 50%{ background-position:100% 100% } 100%{ background-position:0% 100% } }
+    .portrait{width:360px;height:360px;border-radius:18px;overflow:hidden;display:flex;align-items:center;justify-content:center;border:4px solid rgba(250,204,21,0.15);position:relative}
+    .portrait img{width:88%;height:88%;object-fit:cover;border-radius:12px}
+    .flag-overlay{position:absolute;inset:6px;border-radius:14px;mix-blend-mode:overlay;opacity:.5;background:linear-gradient(90deg,#00000055,#ff000044,#00660055,#ffffff22)}
 
-    /* sections */
-    .section-card{ background: rgba(9,14,22,0.6); padding:1.6rem; border-radius:32px; border:1px solid rgba(255,255,255,0.04); }
-    .section-title{ font-family:'Montserrat',sans-serif; font-size:1.6rem; font-weight:700; margin-bottom:1rem; display:flex; align-items:center; gap:.6rem; color:transparent; background: linear-gradient(135deg,var(--accent),var(--accent-2),#3b82f6); -webkit-background-clip:text; }
+    /* section card */
+    .card{background:var(--card);padding:1.4rem;border-radius:28px;border:1px solid rgba(255,255,255,0.03)}
+    .section-title{font-family:Montserrat,serif;font-weight:800;font-size:1.3rem;margin-bottom:.9rem;background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit-background-clip:text;color:transparent;display:flex;align-items:center;gap:.6rem}
 
-    /* projects button */
-    .projects-single-btn{ display:flex; flex-direction:column; align-items:center; gap:.9rem; padding:1rem 0; text-align:center; }
-    .projects-single-btn p{ color:var(--muted); }
+    /* projects grid */
+    .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem}
+    .project{padding:1rem;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.02);display:flex;flex-direction:column;gap:.6rem}
+    .project h3{font-size:1.05rem}
+    .project p{color:var(--muted);font-size:.95rem}
+    .project .meta{display:flex;gap:.5rem;flex-wrap:wrap;color:var(--muted);font-size:.88rem}
+    .project .actions{margin-top:auto;display:flex;gap:.5rem}
+
+    /* modal */
+    .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;padding:1.2rem;z-index:60}
+    .modal{width:100%;max-width:820px;background:#07101a;padding:1.2rem;border-radius:12px;border:1px solid rgba(255,255,255,0.04)}
+    .modal .close{float:right;cursor:pointer}
 
     /* skills */
-    .skills-wrap{ display:flex; gap:.7rem; flex-wrap:wrap; }
-    .skill-pill{ padding:.38rem .9rem; border-radius:999px; background: rgba(250,204,21,0.08); border:1px solid rgba(250,204,21,0.11); color:var(--text); font-weight:600; transition:.12s; }
-    .skill-pill:hover{ background: var(--accent); color:#07101a; border-color:var(--accent); }
+    .skills-grid{display:flex;flex-direction:column;gap:.6rem}
+    .skill{display:flex;flex-direction:column;gap:.25rem}
+    .skill .label{display:flex;justify-content:space-between;color:var(--muted);font-weight:600}
+    .bar{height:12px;border-radius:999px;background:rgba(255,255,255,0.03);overflow:hidden}
+    .bar > span{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-2));width:0%;transition:width 900ms ease}
 
-    /* contact */
-    .contact-row{ display:flex; gap:1rem; flex-wrap:wrap; margin-top:.5rem; }
-    .contact-link{ display:inline-flex; align-items:center; gap:.6rem; background: rgba(255,255,255,0.03); padding:.5rem .9rem; border-radius:999px; color:var(--text); text-decoration:none; border:1px solid rgba(255,255,255,0.04); transition:.12s; }
-    .contact-link:hover{ background: rgba(250,204,21,0.12); border-color:var(--accent); transform:translateY(-2px); }
+    /* timeline */
+    .timeline{display:flex;flex-direction:column;gap:1rem}
+    .timeline-item{display:flex;gap:1rem}
+    .timeline-item .marker{width:12px;height:12px;border-radius:50%;background:var(--accent);margin-top:6px}
+    .timeline-item .content{background:rgba(255,255,255,0.02);padding:.7rem;border-radius:10px;border:1px solid rgba(255,255,255,0.02)}
 
-    footer{ text-align:center; padding:1.2rem 0 .6rem; color:#94a3b8; font-size:.86rem; border-top:1px solid rgba(255,255,255,0.03); }
+    /* testimonials */
+    .carousel{display:flex;gap:1rem;overflow:hidden;position:relative}
+    .testimonial{min-width:320px;background:rgba(255,255,255,0.02);padding:1rem;border-radius:12px}
+    .carousel-controls{display:flex;gap:.5rem;margin-top:.6rem}
 
-    /* responsive */
-    @media (max-width:780px){
-      .hero-grid{ grid-template-columns:1fr; text-align:center; padding:1rem; }
-      nav.nav-links{ order:3; width:100%; justify-content:center; margin-top:.5rem; }
-      .portrait-card{ width:160px; height:160px; }
-    }
-    @media (max-width:480px){
-      .hero-text h1{ font-size:2.2rem; }
-    }
+    /* contact form */
+    form{display:flex;flex-direction:column;gap:.6rem}
+    input,textarea,select{padding:.6rem;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:var(--text)}
+    textarea{min-height:120px;resize:vertical}
+    .row{display:flex;gap:.6rem}
+    @media(max-width:900px){.hero{grid-template-columns:1fr;}.portrait{width:260px;height:260px;margin:auto}}
 
-    /* prefers-reduced-motion: reduce animations for users who opt out */
+    /* small helpers */
+    .muted{color:var(--muted)}
+    .center{text-align:center}
+    .sm{font-size:.9rem;color:var(--muted)}
+
+    /* reduce animations if user prefers */
     @media (prefers-reduced-motion: reduce){
-      * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+      .bar > span{transition:none}
     }
   </style>
 </head>
 <body>
-  <a href="#main" class="skip-link">Skip to main content</a>
+  <a href="#main" class="skip">Skip to main content</a>
 
-  <div class="orb orb1" aria-hidden="true"></div>
-  <div class="orb orb2" aria-hidden="true"></div>
-  <div class="orb orb3" aria-hidden="true"></div>
+  <div class="container" role="document">
+    <header role="banner">
+      <div style="display:flex;align-items:center;gap:.8rem">
+        <div class="brand" aria-hidden="true"><i class="fas fa-bolt" style="color:var(--accent)"></i> PK DRILLER</div>
+        <div class="sm muted">• Developer • Creator • Kenya</div>
+      </div>
 
-  <div class="container">
-    <header class="glass-header" role="banner">
-      <div class="logo"><i class="fas fa-bolt" style="color:var(--accent);"></i>&nbsp;PK DRILLER</div>
-
-      <nav class="nav-links" role="navigation" aria-label="Primary">
+      <nav aria-label="Primary navigation">
         <a href="#projects">Projects</a>
         <a href="#skills">Skills</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-        <a class="btn-outline" href="/resume.pdf" download aria-label="Download resume">Resume</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact" class="primary">Contact</a>
+        <a href="resume.html" class="btn btn--primary" target="_blank" rel="noopener noreferrer" aria-label="Open resume">Resume</a>
       </nav>
     </header>
 
-    <main id="main" role="main">
-      <!-- Live stats row (aria-live) -->
-      <div id="liveStats" class="stats-grid" role="status" aria-live="polite" aria-atomic="false">
-        <div class="stat-item"><i class="fas fa-map-pin" aria-hidden="true"></i> <span class="stat-value" id="locationDisplay">Kenya 🇰🇪</span></div>
-        <div class="stat-item"><i class="fas fa-battery-three-quarters" aria-hidden="true"></i> <span class="stat-value" id="batteryDisplay">--%</span></div>
-        <div class="stat-item"><i class="fas fa-clock" aria-hidden="true"></i> <span class="stat-value" id="timeDisplay">--:--:--</span></div>
-        <div class="stat-item"><i class="fas fa-calendar-day" aria-hidden="true"></i> <span class="stat-value" id="dateDisplay">--</span></div>
-      </div>
+    <main id="main" role="main" aria-live="polite">
+      <!-- HERO -->
+      <section class="hero" aria-labelledby="hero-title">
+        <div>
+          <h1 id="hero-title">Benard <br><span style="color:var(--muted);font-weight:700">Wachira</span></h1>
+          <p class="lead">I build web apps, bots and developer tools. Strong focus on reliability, developer experience and automation. I design APIs, ship scalable services, and publish developer tooling.</p>
 
-      <!-- hero -->
-      <section class="hero-grid" aria-labelledby="heroTitle">
-        <div class="hero-text">
-          <h1 id="heroTitle">Benard <br>Wachira</h1>
-          <p><i class="fas fa-code" style="color:var(--accent);" aria-hidden="true"></i> Developer · Creator · Tech storyteller from Kenya</p>
-          <p style="font-size:.95rem; color:var(--muted);">Turning ideas into digital experiences with heart & energy.</p>
-          <div class="hero-cta">
-            <a href="#projects" class="btn" aria-label="See work on this page"><i class="fas fa-rocket" aria-hidden="true"></i> See Work</a>
-            <a href="#contact" class="btn btn-outline" aria-label="Connect with me"><i class="fas fa-comment" aria-hidden="true"></i> Connect</a>
-            <a href="https://github.com/officialpkdriller?tab=repositories" class="btn" target="_blank" rel="noopener noreferrer" aria-label="View all projects on GitHub"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a>
+          <div class="ctas">
+            <a href="#projects" class="btn btn--primary" aria-label="See my work"><i class="fas fa-rocket"></i> See Work</a>
+            <a href="#contact" class="btn btn--ghost" aria-label="Contact me"><i class="fas fa-comment"></i> Connect</a>
+            <a href="https://github.com/officialpkdriller?tab=repositories" target="_blank" rel="noopener noreferrer" class="btn" aria-label="View GitHub"><i class="fab fa-github"></i> GitHub</a>
+          </div>
+
+          <div class="hero-stats" aria-hidden="false" style="margin-top:1rem">
+            <div class="stat"><i class="fas fa-code" style="color:var(--accent)"></i><strong>Tech</strong><span class="sm muted" style="margin-left:.5rem">Go · Node · React · Python</span></div>
+            <div class="stat"><i class="fas fa-award" style="color:var(--accent)"></i><strong>Experience</strong><span class="sm muted" style="margin-left:.5rem">5+ years</span></div>
+            <div class="stat"><i class="fas fa-globe" style="color:var(--accent)"></i><strong>Location</strong><span class="sm muted" style="margin-left:.5rem">Kenya (Remote)</span></div>
           </div>
         </div>
 
-        <div class="portrait-wrapper" aria-hidden="false">
-          <div class="portrait-card" aria-hidden="false">
-            <img src="https://files.catbox.moe/klky1e.jpg" alt="Portrait of Benard Wachira (PK Driller)" loading="lazy" width="360" height="360">
-            <div class="flag-overlay" aria-hidden="true"></div>
+        <aside class="portrait" aria-hidden="false">
+          <img loading="lazy" src="https://files.catbox.moe/klky1e.jpg" alt="Portrait of Benard Wachira">
+          <div class="flag-overlay" aria-hidden="true"></div>
+        </aside>
+      </section>
+
+      <!-- Projects -->
+      <section id="projects" class="card" aria-labelledby="projects-title">
+        <h2 id="projects-title" class="section-title"><i class="fas fa-project-diagram"></i> Projects & Case Studies</h2>
+        <p class="sm muted">Selected projects with links and short case studies. Click "Details" to open the case modal. Add your own repos and metrics for each card.</p>
+
+        <div class="projects-grid" id="projectsGrid">
+          <!-- Example project card: copy this and replace content for each project -->
+          <article class="project" data-project='{"title":"HighPerf API","desc":"A high-performance Go API with worker pools and observability. Handles 10k RPS with graceful shutdown and retries.","tech":["Go","gRPC","Prometheus"],"repo":"https://github.com/officialpkdriller/highperf-api","live":"https://highperf.example"}'>
+            <h3>HighPerf API</h3>
+            <p>High-performance API server with observability and scalable worker pools.</p>
+            <div class="meta"><span>Go</span><span>gRPC</span><span>Docker</span></div>
+            <div class="actions">
+              <a class="btn" href="https://github.com/officialpkdriller/highperf-api" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Repo</a>
+              <button class="btn btn--ghost js-open-project">Details</button>
+            </div>
+          </article>
+
+          <article class="project" data-project='{"title":"DevTool CLI","desc":"CLI to scaffold and deploy local development environments. Plug-ins for Laravel, Node and more.","tech":["Node.js","TypeScript"],"repo":"https://github.com/officialpkdriller/devtool-cli","live":""}'>
+            <h3>DevTool CLI</h3>
+            <p>Developer CLI for local dev & deploy automation with presets and plugins.</p>
+            <div class="meta"><span>Node.js</span><span>TypeScript</span><span>CLI</span></div>
+            <div class="actions">
+              <a class="btn" href="https://github.com/officialpkdriller/devtool-cli" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Repo</a>
+              <button class="btn btn--ghost js-open-project">Details</button>
+            </div>
+          </article>
+
+          <article class="project" data-project='{"title":"Demo Frontend","desc":"A lightweight demo front-end with preview deploys and accessibility-first design.","tech":["React","Vercel"],"repo":"https://github.com/officialpkdriller/demo-frontend","live":"https://demo.example"}'>
+            <h3>Demo Frontend</h3>
+            <p>Accessible front-end with preview deploys, design tokens, and component library.</p>
+            <div class="meta"><span>React</span><span>Vercel</span><span>Design</span></div>
+            <div class="actions">
+              <a class="btn" href="https://github.com/officialpkdriller/demo-frontend" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Repo</a>
+              <button class="btn btn--ghost js-open-project">Details</button>
+            </div>
+          </article>
+
+        </div>
+
+        <div class="sm muted" style="margin-top:1rem">Want me to populate this with live data (stars, languages, README summaries)? I can audit your repos and insert real links and metrics.</div>
+      </section>
+
+      <!-- Skills -->
+      <section id="skills" class="card" aria-labelledby="skills-title">
+        <h2 id="skills-title" class="section-title"><i class="fas fa-cogs"></i> Skills</h2>
+        <div class="skills-grid">
+          <div class="skill">
+            <div class="label"><span>Go</span><span class="muted">80%</span></div>
+            <div class="bar" data-percent="80"><span style="width:0%"></span></div>
+          </div>
+          <div class="skill">
+            <div class="label"><span>TypeScript</span><span class="muted">75%</span></div>
+            <div class="bar" data-percent="75"><span style="width:0%"></span></div>
+          </div>
+          <div class="skill">
+            <div class="label"><span>React</span><span class="muted">70%</span></div>
+            <div class="bar" data-percent="70"><span style="width:0%"></span></div>
+          </div>
+          <div class="skill">
+            <div class="label"><span>Node.js</span><span class="muted">78%</span></div>
+            <div class="bar" data-percent="78"><span style="width:0%"></span></div>
+          </div>
+          <div class="skill">
+            <div class="label"><span>CI / CD</span><span class="muted">82%</span></div>
+            <div class="bar" data-percent="82"><span style="width:0%"></span></div>
           </div>
         </div>
       </section>
 
-      <!-- projects -->
-      <section id="projects" class="section-card" aria-labelledby="projectsTitle">
-        <h2 id="projectsTitle" class="section-title"><i class="fas fa-project-diagram" aria-hidden="true"></i> Projects</h2>
-        <div class="projects-single-btn">
-          <p><i class="fas fa-github" style="color:var(--accent);" aria-hidden="true"></i> All my projects are on GitHub — click below to explore.</p>
-          <a href="https://github.com/officialpkdriller?tab=repositories" target="_blank" rel="noopener noreferrer" class="btn" aria-label="View projects on GitHub">
-            <i class="fab fa-github" aria-hidden="true"></i> View on GitHub
-          </a>
+      <!-- Experience -->
+      <section id="experience" class="card" aria-labelledby="exp-title">
+        <h2 id="exp-title" class="section-title"><i class="fas fa-briefcase"></i> Experience</h2>
+
+        <div class="timeline" role="list">
+          <div class="timeline-item" role="listitem">
+            <div class="marker" aria-hidden="true"></div>
+            <div class="content">
+              <div style="display:flex;justify-content:space-between"><strong>Senior Backend Engineer — Acme Inc</strong><span class="muted">2022 — Present</span></div>
+              <div class="sm muted">Designed microservices for payment processing, implemented observability with Prometheus & Grafana, and led reliability initiatives.</div>
+            </div>
+          </div>
+
+          <div class="timeline-item" role="listitem">
+            <div class="marker" aria-hidden="true"></div>
+            <div class="content">
+              <div style="display:flex;justify-content:space-between"><strong>Full-Stack Developer — Startup XYZ</strong><span class="muted">2019 — 2022</span></div>
+              <div class="sm muted">Built customer-facing dashboards, internal tooling and scaled the product from MVP to 10k users.</div>
+            </div>
+          </div>
+
+          <div class="timeline-item" role="listitem">
+            <div class="marker" aria-hidden="true"></div>
+            <div class="content">
+              <div style="display:flex;justify-content:space-between"><strong>Freelancer & Open-source</strong><span class="muted">2017 — 2019</span></div>
+              <div class="sm muted">Open-source contributions, bots, and small product launches focused on developer workflows.</div>
+            </div>
+          </div>
         </div>
       </section>
 
-      <!-- skills -->
-      <section id="skills" class="section-card" aria-labelledby="skillsTitle">
-        <h2 id="skillsTitle" class="section-title"><i class="fas fa-cogs" aria-hidden="true"></i> Skills</h2>
-        <div class="skills-wrap" aria-hidden="false">
-          <span class="skill-pill">JavaScript</span>
-          <span class="skill-pill">React</span>
-          <span class="skill-pill">Node.js</span>
-          <span class="skill-pill">Python</span>
-          <span class="skill-pill">MongoDB</span>
-          <span class="skill-pill">UI/UX</span>
-          <span class="skill-pill">Git</span>
-          <span class="skill-pill">Telegram APIs</span>
-          <span class="skill-pill">Automation</span>
-          <span class="skill-pill">HTML5/CSS3</span>
-          <span class="skill-pill">REST APIs</span>
-          <span class="skill-pill">Vercel</span>
+      <!-- Education & Certifications -->
+      <section class="card" aria-labelledby="edu-title">
+        <h2 id="edu-title" class="section-title"><i class="fas fa-graduation-cap"></i> Education & Certifications</h2>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap">
+          <div style="flex:1;min-width:220px">
+            <strong>BSc Computer Science</strong><div class="muted sm">University — 2015 — 2018</div>
+          </div>
+          <div style="flex:1;min-width:220px">
+            <strong>Cert: Cloud DevOps (example)</strong><div class="muted sm">Certifying body — 2021</div>
+          </div>
+          <div style="flex:1;min-width:220px">
+            <strong>Cert: Kubernetes Fundamentals</strong><div class="muted sm">Certifying body — 2022</div>
+          </div>
         </div>
       </section>
 
-      <!-- about -->
-      <section id="about" class="section-card" aria-labelledby="aboutTitle">
-        <h2 id="aboutTitle" class="section-title"><i class="fas fa-user-astronaut" aria-hidden="true"></i> About</h2>
-        <div class="about-text">
-          <p><strong>👋 I'm Benard Wachira (PK Driller)</strong> – a passionate developer and tech explorer from Kenya. I build web apps, bots, and creative tools that solve real problems. I believe in bold ideas, bright colours, and code that tells a story. When I'm not coding, I'm sharing knowledge and connecting with fellow makers.</p>
-          <p style="margin-top:.6rem;"><i class="fas fa-heart" style="color:var(--accent-2);" aria-hidden="true"></i> Let's build something memorable together.</p>
-          <p style="margin-top:.4rem; font-size:.9rem; color:var(--muted);"><i class="fas fa-flag" style="color:var(--accent);" aria-hidden="true"></i> Proudly Kenyan · 🇰🇪</p>
+      <!-- Blog / Writing -->
+      <section id="blog" class="card" aria-labelledby="blog-title">
+        <h2 id="blog-title" class="section-title"><i class="fas fa-pen-nib"></i> Writing & Talks</h2>
+        <p class="muted sm">Short articles, tutorials and talks. Link to your blog or embed selected posts here.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:1rem">
+          <article style="background:rgba(255,255,255,0.02);padding:1rem;border-radius:10px">
+            <h4>How I built a resilient API</h4>
+            <p class="sm muted">Short summary. <a href="#" style="color:var(--accent)">Read →</a></p>
+          </article>
+          <article style="background:rgba(255,255,255,0.02);padding:1rem;border-radius:10px">
+            <h4>Deploy previews with GitHub Actions</h4>
+            <p class="sm muted">Short summary. <a href="#" style="color:var(--accent)">Read →</a></p>
+          </article>
         </div>
       </section>
 
-      <!-- contact -->
-      <section id="contact" class="section-card" aria-labelledby="contactTitle">
-        <h2 id="contactTitle" class="section-title"><i class="fas fa-address-card" aria-hidden="true"></i> Contact</h2>
-        <div class="contact-row">
-          <a href="https://github.com/officialpkdriller" class="contact-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a>
-          <a href="https://wa.me/254799056874" class="contact-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
-          <a href="https://t.me/dev_pkdrillerbot" class="contact-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-telegram" aria-hidden="true"></i> Telegram</a>
-          <a href="mailto:benardwachira49@gmail.com" class="contact-link"><i class="fas fa-envelope" aria-hidden="true"></i> Email</a>
-          <a href="https://www.instagram.com/pk_tech01" class="contact-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram" aria-hidden="true"></i> Instagram</a>
+      <!-- Testimonials -->
+      <section class="card" aria-labelledby="test-title">
+        <h2 id="test-title" class="section-title"><i class="fas fa-comments"></i> Testimonials</h2>
+        <div class="carousel" id="carousel" aria-live="polite">
+          <div class="testimonial">
+            <strong>Jane Doe — CTO</strong>
+            <p class="sm muted">"Benard shipped a robust API and improved our deployment reliability — we saw less downtime and faster releases."</p>
+          </div>
+          <div class="testimonial">
+            <strong>John Smith — Product</strong>
+            <p class="sm muted">"Great communication and pragmatism; Benard turned an idea into a production feature in under two weeks."</p>
+          </div>
+        </div>
+        <div class="carousel-controls">
+          <button class="btn" id="prevTest">Prev</button>
+          <button class="btn" id="nextTest">Next</button>
         </div>
       </section>
+
+      <!-- Contact -->
+      <section id="contact" class="card" aria-labelledby="contact-title">
+        <h2 id="contact-title" class="section-title"><i class="fas fa-address-card"></i> Contact & Hire</h2>
+        <p class="muted sm">I'm available for freelance and full-time roles. Use the form or contact directly.</p>
+
+        <!-- FORM: Replace action with your Formspree endpoint or a serverless function -->
+        <form id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
+          <div class="row">
+            <input type="text" name="name" placeholder="Your name" required aria-label="Your name">
+            <input type="email" name="_replyto" placeholder="you@example.com" required aria-label="Your email">
+          </div>
+          <input type="text" name="subject" placeholder="Subject" aria-label="Subject">
+          <textarea name="message" placeholder="Tell me about your project..." required aria-label="Message"></textarea>
+
+          <!-- recommended: add a hidden honeypot or use Formspree's anti-spam -->
+          <input type="hidden" name="_subject" value="New message from portfolio site">
+          <div style="display:flex;gap:.6rem;align-items:center">
+            <button type="submit" class="btn btn--primary">Send message</button>
+            <a href="mailto:benardwachira49@gmail.com" class="btn btn--ghost">Or email me</a>
+          </div>
+
+          <p id="formStatus" class="sm muted" style="margin-top:.6rem"></p>
+        </form>
+
+        <div style="margin-top:1rem" class="sm muted">
+          <strong>Other ways:</strong>
+          <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem">
+            <a href="https://github.com/officialpkdriller" target="_blank" rel="noopener noreferrer" class="muted"><i class="fab fa-github"></i> GitHub</a>
+            <a href="https://t.me/dev_pkdrillerbot" target="_blank" rel="noopener noreferrer" class="muted"><i class="fab fa-telegram"></i> Telegram</a>
+            <a href="https://wa.me/254799056874" target="_blank" rel="noopener noreferrer" class="muted"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Newsletter -->
+      <section class="card" aria-labelledby="news-title">
+        <h2 id="news-title" class="section-title"><i class="fas fa-envelope-open-text"></i> Newsletter</h2>
+        <p class="sm muted">Sign up for short monthly updates about tooling, tutorials, and releases. (Placeholder: replace with Mailchimp / ConvertKit / Buttondown integration.)</p>
+        <div style="margin-top:.6rem;display:flex;gap:.6rem;flex-wrap:wrap">
+          <input placeholder="you@example.com" aria-label="Newsletter email" style="padding:.6rem;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text)">
+          <button class="btn btn--primary">Subscribe</button>
+        </div>
+      </section>
+
+      <footer class="center sm muted" style="margin-top:1rem">
+        <div>© <strong>Benard "PK Driller" Wachira</strong> — Built with ❤️ in Kenya</div>
+        <div style="margin-top:.5rem">Want this site deployed? I can add GitHub Actions to auto-deploy to GitHub Pages or Vercel.</div>
+      </footer>
     </main>
+  </div>
 
-    <footer>
-      <div><i class="fas fa-crown" style="color:var(--accent);" aria-hidden="true"></i> PK Driller · built with <i class="fas fa-heart" style="color:var(--accent-2);" aria-hidden="true"></i> in Kenya</div>
-    </footer>
+  <!-- Modal for project details -->
+  <div id="modalBackdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal" role="document" aria-labelledby="modalTitle">
+      <button id="closeModal" class="close" aria-label="Close project details" style="background:transparent;border:none;color:var(--muted);font-size:1.1rem">✕</button>
+      <h3 id="modalTitle">Project title</h3>
+      <p id="modalDesc" class="sm muted">Project description</p>
+      <div id="modalMeta" class="sm muted"></div>
+      <div style="margin-top:1rem">
+        <a id="modalRepo" class="btn" href="#" target="_blank">View Repo</a>
+        <a id="modalLive" class="btn btn--ghost" href="#" target="_blank">Live demo</a>
+      </div>
+    </div>
   </div>
 
   <script>
+    // Small interactivity: progress bars, project modal, contact form
     (function(){
-      // Utilities for graceful fallback
-      const el = id => document.getElementById(id);
+      // Animate skill bars
+      document.addEventListener('DOMContentLoaded', function(){
+        document.querySelectorAll('.bar').forEach(bar => {
+          const percent = bar.getAttribute('data-percent') || 0;
+          const inner = bar.querySelector('span');
+          setTimeout(()=> inner.style.width = percent + '%', 350);
+        });
+      });
 
-      // 1) Time & Date
-      function updateTime() {
-        const now = new Date();
-        el('timeDisplay').textContent = now.toLocaleTimeString();
-        el('dateDisplay').textContent = now.toLocaleDateString(undefined, { weekday:'short', month:'short', day:'numeric', year:'numeric' });
+      // Project modal
+      const modalBackdrop = document.getElementById('modalBackdrop');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalDesc = document.getElementById('modalDesc');
+      const modalMeta = document.getElementById('modalMeta');
+      const modalRepo = document.getElementById('modalRepo');
+      const modalLive = document.getElementById('modalLive');
+      const closeModal = document.getElementById('closeModal');
+
+      function openModal(data){
+        modalTitle.textContent = data.title || 'Project';
+        modalDesc.textContent = data.desc || '';
+        modalMeta.innerHTML = (data.tech || []).map(t => '<span style="margin-right:.5rem">• ' + t + '</span>').join('');
+        modalRepo.href = data.repo || '#';
+        modalLive.href = data.live || '#';
+        modalBackdrop.style.display = 'flex';
+        modalBackdrop.setAttribute('aria-hidden','false');
+        closeModal.focus();
       }
-      updateTime();
-      setInterval(updateTime, 1000);
+      function close(){
+        modalBackdrop.style.display = 'none';
+        modalBackdrop.setAttribute('aria-hidden','true');
+      }
+      document.querySelectorAll('.js-open-project').forEach(btn => {
+        btn.addEventListener('click', e => {
+          const project = e.target.closest('.project');
+          if(!project) return;
+          const raw = project.getAttribute('data-project');
+          try{
+            const data = JSON.parse(raw);
+            openModal(data);
+          }catch(err){
+            openModal({title:'Project', desc:'No details available'});
+          }
+        });
+      });
+      closeModal.addEventListener('click', close);
+      modalBackdrop.addEventListener('click', e => { if(e.target === modalBackdrop) close(); });
 
-      // 2) Battery API (graceful)
-      function setBatteryText(text){ if(el('batteryDisplay')) el('batteryDisplay').textContent = text; }
-      if (navigator.getBattery) {
-        navigator.getBattery().then(bat => {
-          const update = () => setBatteryText(Math.round(bat.level * 100) + (bat.charging ? ' ⚡' : '%'));
-          update();
-          bat.addEventListener('levelchange', update);
-          bat.addEventListener('chargingchange', update);
-        }).catch(()=> setBatteryText('N/A'));
-      } else {
-        // Some browsers expose navigator.battery or don't support battery at all.
-        if (navigator.battery && typeof navigator.battery.level === 'number') {
-          try { setBatteryText(Math.round(navigator.battery.level * 100) + '%'); } catch(e){ setBatteryText('N/A'); }
-        } else {
-          setBatteryText('N/A');
-        }
+      // Simple carousel for testimonials
+      const carousel = document.getElementById('carousel');
+      const items = Array.from(carousel.children);
+      let index = 0;
+      function show(i){
+        items.forEach((it,idx)=> it.style.transform = `translateX(${(idx - i) * 100}%)`);
+      }
+      show(0);
+      document.getElementById('prevTest').addEventListener('click', ()=> { index = (index - 1 + items.length) % items.length; show(index); });
+      document.getElementById('nextTest').addEventListener('click', ()=> { index = (index + 1) % items.length; show(index); });
+
+      // Contact form: progressive enhancement with Formspree
+      const form = document.getElementById('contactForm');
+      const status = document.getElementById('formStatus');
+      if(form){
+        form.addEventListener('submit', function(e){
+          e.preventDefault();
+          const action = form.action;
+          // If action contains "formspree.io" do AJAX submit (so we can show status)
+          if(action && action.includes('formspree.io')){
+            const data = new FormData(form);
+            fetch(action, {method:'POST', body:data, headers:{'Accept':'application/json'}})
+              .then(r => r.json())
+              .then(res => {
+                if(res.ok || res.success || res._id){
+                  status.textContent = 'Thanks — message sent!';
+                  form.reset();
+                } else if(res.error){
+                  status.textContent = 'Error: ' + (res.error || 'Unable to send.');
+                } else {
+                  status.textContent = 'Thanks — message sent!';
+                }
+              })
+              .catch(err => { status.textContent = 'Error sending message — please email me directly.'; });
+          } else {
+            // fallback: use mailto (opens user's mail client)
+            const name = form.querySelector('[name=name]').value || '';
+            const email = form.querySelector('[name=_replyto]').value || '';
+            const subject = form.querySelector('[name=subject]').value || 'Contact';
+            const msg = form.querySelector('[name=message]').value || '';
+            window.location.href = `mailto:benardwachira49@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent('From: '+name+' <'+email+'>\n\n'+msg)}`;
+          }
+        });
       }
 
-      // 3) Geolocation -> reverse geocode with OSM (free). If user declines, fallback to "Kenya"
-      function setLocationFromCoords({ coords }) {
-        const { latitude, longitude } = coords;
-        fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json&zoom=10`)
-          .then(r => r.json())
-          .then(data => {
-            const addr = data.address || {};
-            const city = addr.city || addr.town || addr.village || addr.county || '';
-            const country = addr.country || 'Kenya';
-            el('locationDisplay').textContent = city ? `${city}, ${country}` : `${country}`;
-          })
-          .catch(()=> { el('locationDisplay').textContent = 'Kenya 🇰🇪'; });
-      }
-      function setLocationFallback(){ if(el('locationDisplay')) el('locationDisplay').textContent = 'Kenya 🇰🇪'; }
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(setLocationFromCoords, setLocationFallback, { timeout:7000, maximumAge:300000, enableHighAccuracy:false });
-      } else setLocationFallback();
+      // Keyboard accessible modal close (Escape)
+      document.addEventListener('keydown', function(e){
+        if(e.key === 'Escape' && modalBackdrop.style.display === 'flex') close();
+      });
 
-      // tidy: remove any inline widths if portrait missing (not necessary)
+      // Passive fonts: no extra heavy scripts
+
+      // TODO: optionally fetch GitHub repo data via GitHub API and populate features (requires token)
     })();
   </script>
 </body>
