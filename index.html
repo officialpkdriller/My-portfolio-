@@ -1,598 +1,344 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>PK Driller • live portfolio</title>
-  <!-- Font Awesome 6 (free) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <!-- Google Fonts -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+  <title>PK Driller • live portfolio — Benard Wachira</title>
+  <meta name="description" content="Benard (PK Driller) — developer and creator from Kenya. Web apps, bots, devtools, and CI/CD. Explore projects, skills, and contact." />
+  <meta name="theme-color" content="#0b0e14" />
+
+  <!-- Open Graph / Social preview -->
+  <meta property="og:title" content="PK Driller — Benard Wachira" />
+  <meta property="og:description" content="Developer & creator from Kenya — web apps, bots, and tools. Connect on GitHub, Telegram, or email." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://your-portfolio.example/" />
+  <meta property="og:image" content="https://your-portfolio.example/og-image.png" />
+
+  <!-- Structured data: Person -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Benard Wachira",
+    "alternateName": "PK Driller",
+    "url": "https://your-portfolio.example",
+    "sameAs": [
+      "https://github.com/officialpkdriller",
+      "https://t.me/dev_pkdrillerbot",
+      "https://www.instagram.com/pk_tech01"
+    ],
+    "jobTitle": "Software Developer",
+    "address": { "@type": "Country", "name": "Kenya" }
+  }
+  </script>
+
+  <!-- Fonts: preconnect and only necessary weights -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Inter:opsz@14..32&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome (kept for icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="" crossorigin="anonymous">
+
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    /* Base reset */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root{
+      --bg:#0b0e14; --muted:#94a3b8; --text:#f0f3fa; --accent:#facc15; --accent-2:#f472b6;
+      --glass-1: rgba(18,26,36,0.7); --glass-2: rgba(12,22,35,0.7);
     }
+    html,body { height:100%; }
     body {
-      background: #0b0e14;
-      color: #f0f3fa;
-      font-family: 'Inter', sans-serif;
-      min-height: 100vh;
-      padding: 1rem;
-      position: relative;
-      overflow-x: hidden;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      min-height:100vh; padding:1rem; position:relative; overflow-x:hidden;
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
     }
-    /* animated gradient background */
+
+    /* Skip link for keyboard users */
+    a.skip-link {
+      position: absolute; left: -999px; top: auto; width:1px; height:1px; overflow:hidden;
+    }
+    a.skip-link:focus {
+      left: 1rem; top: 1rem; width: auto; height: auto; padding: .5rem .75rem;
+      background: #111827; color: var(--text); border-radius: 6px; z-index: 10000;
+    }
+
+    /* Animated gradient background (subtle) */
     body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      z-index: -2;
-      background: radial-gradient(circle at 20% 30%, #1a5cff, transparent 70%),
-                  radial-gradient(circle at 80% 70%, #ff3b7a, transparent 60%),
-                  radial-gradient(circle at 40% 80%, #00e6b0, transparent 55%),
-                  radial-gradient(circle at 70% 20%, #ffb347, transparent 50%);
-      background-blend-mode: screen;
-      animation: aurora 18s infinite alternate;
-      opacity: 0.4;
+      content:''; position: fixed; inset:0; z-index:-2;
+      background:
+        radial-gradient(circle at 20% 30%, #1a5cff44, transparent 70%),
+        radial-gradient(circle at 80% 70%, #ff3b7a33, transparent 60%),
+        radial-gradient(circle at 40% 80%, #00e6b033, transparent 55%),
+        radial-gradient(circle at 70% 20%, #ffb34722, transparent 50%);
+      background-blend-mode: screen; opacity: .45;
+      animation: aurora 20s ease-in-out infinite alternate;
+      will-change: transform, opacity;
     }
     @keyframes aurora {
       0% { transform: scale(1) rotate(0deg); }
-      50% { transform: scale(1.2) rotate(3deg); }
-      100% { transform: scale(0.9) rotate(-2deg); }
-    }
-    /* floating orbs */
-    .orb {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(60px);
-      pointer-events: none;
-      z-index: -1;
-      opacity: 0.25;
-      animation: floatOrb 10s ease-in-out infinite alternate;
-    }
-    .orb1 { width: 300px; height: 300px; background: #3b82f6; top: 10vh; left: 5vw; }
-    .orb2 { width: 400px; height: 400px; background: #ec4899; bottom: 5vh; right: 2vw; animation-duration: 14s; }
-    .orb3 { width: 200px; height: 200px; background: #10b981; top: 60vh; left: 70vw; animation-duration: 12s; }
-    @keyframes floatOrb {
-      0% { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(30px, -40px) scale(1.2); }
+      50% { transform: scale(1.08) rotate(2deg); }
+      100% { transform: scale(.98) rotate(-1.5deg); }
     }
 
-    /* main container */
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-    }
+    /* Floating orbs */
+    .orb { position:fixed; border-radius:50%; filter: blur(48px); pointer-events:none; z-index:-1; opacity:.22; }
+    .orb1{ width:260px; height:260px; background:#3b82f6; top:10vh; left:4vw; }
+    .orb2{ width:360px; height:360px; background:#ec4899; right:2vw; bottom:6vh; animation-duration:14s; }
+    .orb3{ width:180px; height:180px; background:#10b981; top:60vh; left:70vw; animation-duration:12s; }
+    @keyframes floatOrb{ 0%{transform:translate(0,0) scale(1)} 100%{transform:translate(24px,-32px) scale(1.12)} }
+    .orb{ animation: floatOrb 12s ease-in-out infinite alternate; }
 
-    /* header */
-    .glass-header {
-      background: rgba(18, 26, 36, 0.7);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-radius: 60px;
-      padding: 0.8rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-      border: 1px solid rgba(255,255,255,0.06);
-    }
-    .logo {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 800;
-      font-size: 1.8rem;
-      background: linear-gradient(135deg, #facc15, #f472b6, #3b82f6);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      letter-spacing: -0.5px;
-    }
-    .nav-links {
-      display: flex;
-      gap: 1.8rem;
-      font-weight: 500;
-    }
-    .nav-links a {
-      color: #e2e8f0;
-      text-decoration: none;
-      font-size: 1rem;
-      transition: 0.2s;
-      border-bottom: 2px solid transparent;
-      padding-bottom: 4px;
-    }
-    .nav-links a:hover {
-      color: #facc15;
-      border-bottom-color: #facc15;
-    }
+    /* Layout container */
+    .container{ max-width:1100px; margin:0 auto; display:flex; flex-direction:column; gap:1.8rem; }
 
-    /* live stats row */
-    .stats-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: space-between;
-      background: rgba(12, 20, 30, 0.6);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border-radius: 40px;
-      padding: 1rem 2rem;
-      border: 1px solid rgba(255,215,0,0.15);
-      margin-top: 0.5rem;
+    /* Header / nav */
+    header.glass-header{
+      background: var(--glass-1); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      border-radius: 48px; padding:.8rem 1.6rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;
+      box-shadow: 0 10px 30px rgba(0,0,0,.45); border:1px solid rgba(255,255,255,0.04);
     }
-    .stat-item {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      font-size: 0.95rem;
-      color: #cbd5e1;
-      background: rgba(0,0,0,0.2);
-      padding: 0.3rem 1rem 0.3rem 0.8rem;
-      border-radius: 40px;
-      backdrop-filter: blur(4px);
+    .logo{ font-family:'Montserrat',sans-serif; font-weight:800; font-size:1.6rem;
+      background: linear-gradient(135deg,var(--accent),var(--accent-2),#3b82f6);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
     }
-    .stat-item i {
-      color: #facc15;
-      font-size: 1.1rem;
-    }
-    .stat-value {
-      font-weight: 600;
-      color: #f8fafc;
-      margin-left: 4px;
-    }
+    nav.nav-links{ display:flex; gap:1.6rem; align-items:center; }
+    nav.nav-links a{ color:var(--muted); text-decoration:none; font-weight:600; padding:.3rem 0; border-bottom:2px solid transparent; transition:.16s; }
+    nav.nav-links a:hover{ color:var(--accent); border-bottom-color:var(--accent); }
 
-    /* hero */
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      align-items: center;
-      background: rgba(8, 14, 23, 0.6);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      border-radius: 50px;
-      padding: 2rem 2.5rem;
-      border: 1px solid rgba(255,255,255,0.04);
-      box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+    /* Live stats row */
+    .stats-grid{
+      display:flex; gap:1rem; flex-wrap:wrap; justify-content:space-between;
+      background: rgba(8,12,18,0.5); padding:.9rem 1.2rem; border-radius:36px; border:1px solid rgba(255,215,0,0.12);
     }
-    .hero-text {
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
+    .stat-item{ display:flex; align-items:center; gap:.6rem; font-size:.95rem; color:var(--muted);
+      padding:.32rem .9rem; border-radius:999px; background: rgba(255,255,255,0.02);
     }
-    .hero-text h1 {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 3.2rem;
-      font-weight: 800;
-      line-height: 1.1;
-      background: linear-gradient(135deg, #facc15, #f472b6, #38bdf8);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .hero-text p {
-      font-size: 1.15rem;
-      color: #b0c4de;
-      max-width: 90%;
-    }
-    .hero-cta {
-      display: flex;
-      gap: 1rem;
-      margin-top: 0.8rem;
-      flex-wrap: wrap;
-    }
-    .btn {
-      background: linear-gradient(135deg, #facc15, #f472b6);
-      border: none;
-      padding: 0.7rem 2rem;
-      border-radius: 40px;
-      font-weight: 600;
-      color: #0b0e14;
-      text-decoration: none;
-      transition: 0.2s;
-      box-shadow: 0 4px 12px rgba(250,204,21,0.3);
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 20px rgba(250,204,21,0.5);
-    }
-    .btn-outline {
-      background: transparent;
-      border: 2px solid #facc15;
-      color: #facc15;
-      box-shadow: none;
-    }
-    .btn-outline:hover {
-      background: #facc15;
-      color: #0b0e14;
-    }
+    .stat-item i{ color:var(--accent); font-size:1.05rem;}
+    .stat-value{ font-weight:700; color:var(--text); margin-left:4px; }
 
-    /* rotating portrait with kenyan flag overlay */
-    .portrait-wrapper {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      perspective: 800px;
+    /* Hero */
+    .hero-grid{
+      display:grid; grid-template-columns: 1fr 1fr; gap:2rem; align-items:center;
+      background: var(--glass-2); backdrop-filter: blur(8px); padding:1.8rem; border-radius:40px; border:1px solid rgba(255,255,255,0.04);
+      box-shadow: 0 18px 44px rgba(0,0,0,.5);
     }
-    .portrait-card {
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #1e293b, #0f172a);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      animation: rotatePortrait 10s linear infinite;
-      border: 4px solid #facc15;
+    .hero-text h1{ font-family:'Montserrat',sans-serif; font-size:3rem; line-height:1.05;
+      background: linear-gradient(135deg,var(--accent),var(--accent-2),#38bdf8);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
     }
-    @keyframes rotatePortrait {
-      0% { transform: rotateY(0deg) scale(1); }
-      50% { transform: rotateY(180deg) scale(1.02); }
-      100% { transform: rotateY(360deg) scale(1); }
-    }
-    .portrait-card img {
-      width: 90%;
-      height: 90%;
-      object-fit: cover;
-      border-radius: 50%;
-      box-shadow: inset 0 0 0 2px rgba(255,215,0,0.3);
-      z-index: 2;
-      position: relative;
-    }
-    /* kenyan flag overlay – rotating colours */
-    .flag-overlay {
-      position: absolute;
-      inset: -6px;
-      border-radius: 50%;
-      pointer-events: none;
-      mix-blend-mode: overlay;
-      opacity: 0.7;
-      background: repeating-conic-gradient(
-        #000000 0% 10%, 
-        #ff0000 10% 20%, 
-        #006600 20% 30%, 
-        #ffffff 30% 40%, 
-        #000000 40% 50%, 
-        #ff0000 50% 60%, 
-        #006600 60% 70%, 
-        #ffffff 70% 80%, 
-        #000000 80% 90%, 
-        #ff0000 90% 100%
-      );
-      background-size: 300% 300%;
-      animation: flagShift 4s ease-in-out infinite alternate;
-      border-radius: 50%;
-      z-index: 1;
-    }
-    @keyframes flagShift {
-      0% { background-position: 0% 0%; transform: rotate(0deg) scale(1.0); opacity: 0.5; }
-      50% { background-position: 100% 100%; transform: rotate(60deg) scale(1.2); opacity: 0.8; }
-      100% { background-position: 0% 100%; transform: rotate(-30deg) scale(0.9); opacity: 0.6; }
-    }
+    .hero-text p { color:var(--muted); font-size:1.05rem; max-width:90%; }
+    .hero-cta{ display:flex; gap:1rem; margin-top:.8rem; flex-wrap:wrap; }
+    .btn{ background: linear-gradient(135deg,var(--accent),var(--accent-2)); border:none; padding:.7rem 1.6rem; border-radius:999px; font-weight:700; color:#07101a; text-decoration:none; display:inline-flex; gap:.6rem; align-items:center; box-shadow:0 6px 20px rgba(250,204,21,.18); transition:.16s; }
+    .btn:hover{ transform:translateY(-3px); box-shadow:0 10px 28px rgba(250,204,21,.28); }
+    .btn-outline{ background:transparent; border:2px solid var(--accent); color:var(--accent); box-shadow:none; }
+    .btn-outline:hover{ background:var(--accent); color:#07101a; }
+
+    /* portrait */
+    .portrait-wrapper{ display:flex; justify-content:center; align-items:center; perspective:900px; }
+    .portrait-card{ width:200px; height:200px; border-radius:50%; background:linear-gradient(135deg,#0f172a,#111827); display:flex; align-items:center; justify-content:center; position:relative; animation: rotatePortrait 10s linear infinite; border:4px solid var(--accent); overflow:hidden; }
+    .portrait-card img{ width:90%; height:90%; object-fit:cover; border-radius:50%; box-shadow:inset 0 0 0 2px rgba(255,215,0,0.18); }
+    .flag-overlay{ position:absolute; inset:-6px; border-radius:50%; mix-blend-mode:overlay; opacity:.65;
+      background: repeating-conic-gradient(#000 0 9%, #ff0000 9% 18%, #006600 18% 27%, #ffffff 27% 36%); background-size:240% 240%; animation: flagShift 4s ease-in-out infinite alternate; }
+    @keyframes rotatePortrait{ 0%{transform:rotateY(0deg)}50%{transform:rotateY(180deg)}100%{transform:rotateY(360deg)} }
+    @keyframes flagShift{ 0%{ background-position:0% 0% } 50%{ background-position:100% 100% } 100%{ background-position:0% 100% } }
 
     /* sections */
-    .section-card {
-      background: rgba(12, 22, 35, 0.7);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      border-radius: 40px;
-      padding: 2rem 2.5rem;
-      border: 1px solid rgba(255,255,255,0.04);
-      transition: 0.2s;
-    }
-    .section-title {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: linear-gradient(135deg, #facc15, #f472b6, #3b82f6);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
+    .section-card{ background: rgba(9,14,22,0.6); padding:1.6rem; border-radius:32px; border:1px solid rgba(255,255,255,0.04); }
+    .section-title{ font-family:'Montserrat',sans-serif; font-size:1.6rem; font-weight:700; margin-bottom:1rem; display:flex; align-items:center; gap:.6rem; color:transparent; background: linear-gradient(135deg,var(--accent),var(--accent-2),#3b82f6); -webkit-background-clip:text; }
 
-    /* projects — single button to GitHub */
-    .projects-single-btn {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-      padding: 1rem 0;
-    }
-    .projects-single-btn .btn {
-      font-size: 1.3rem;
-      padding: 1rem 3rem;
-      background: linear-gradient(135deg, #facc15, #f472b6);
-      box-shadow: 0 0 30px rgba(250,204,21,0.2);
-    }
-    .projects-single-btn .btn i {
-      font-size: 1.6rem;
-    }
-    .projects-single-btn p {
-      color: #94a3b8;
-      font-size: 1rem;
-    }
+    /* projects button */
+    .projects-single-btn{ display:flex; flex-direction:column; align-items:center; gap:.9rem; padding:1rem 0; text-align:center; }
+    .projects-single-btn p{ color:var(--muted); }
 
     /* skills */
-    .skills-wrap {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-    }
-    .skill-pill {
-      background: rgba(250,204,21,0.12);
-      padding: 0.4rem 1.2rem;
-      border-radius: 40px;
-      font-weight: 500;
-      border: 1px solid rgba(250,204,21,0.15);
-      color: #e2e8f0;
-      transition: 0.2s;
-      backdrop-filter: blur(4px);
-    }
-    .skill-pill:hover {
-      background: #facc15;
-      color: #0b0e14;
-      border-color: #facc15;
-    }
-
-    /* about */
-    .about-text {
-      line-height: 1.7;
-      color: #cbd5e1;
-      max-width: 700px;
-    }
-    .about-text strong {
-      color: #facc15;
-    }
+    .skills-wrap{ display:flex; gap:.7rem; flex-wrap:wrap; }
+    .skill-pill{ padding:.38rem .9rem; border-radius:999px; background: rgba(250,204,21,0.08); border:1px solid rgba(250,204,21,0.11); color:var(--text); font-weight:600; transition:.12s; }
+    .skill-pill:hover{ background: var(--accent); color:#07101a; border-color:var(--accent); }
 
     /* contact */
-    .contact-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.2rem;
-      margin-top: 0.5rem;
-    }
-    .contact-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255,255,255,0.05);
-      padding: 0.5rem 1.2rem;
-      border-radius: 40px;
-      text-decoration: none;
-      color: #e2e8f0;
-      border: 1px solid rgba(255,255,255,0.06);
-      transition: 0.2s;
-      backdrop-filter: blur(4px);
-    }
-    .contact-link i {
-      font-size: 1.2rem;
-      color: #facc15;
-    }
-    .contact-link:hover {
-      background: rgba(250,204,21,0.15);
-      border-color: #facc15;
-      transform: scale(1.02);
-    }
+    .contact-row{ display:flex; gap:1rem; flex-wrap:wrap; margin-top:.5rem; }
+    .contact-link{ display:inline-flex; align-items:center; gap:.6rem; background: rgba(255,255,255,0.03); padding:.5rem .9rem; border-radius:999px; color:var(--text); text-decoration:none; border:1px solid rgba(255,255,255,0.04); transition:.12s; }
+    .contact-link:hover{ background: rgba(250,204,21,0.12); border-color:var(--accent); transform:translateY(-2px); }
+
+    footer{ text-align:center; padding:1.2rem 0 .6rem; color:#94a3b8; font-size:.86rem; border-top:1px solid rgba(255,255,255,0.03); }
 
     /* responsive */
-    @media (max-width: 780px) {
-      .hero-grid {
-        grid-template-columns: 1fr;
-        text-align: center;
-        padding: 1.5rem;
-      }
-      .hero-text p {
-        max-width: 100%;
-      }
-      .hero-cta {
-        justify-content: center;
-      }
-      .stats-grid {
-        justify-content: center;
-        gap: 0.6rem;
-      }
-      .glass-header {
-        flex-direction: column;
-        gap: 0.5rem;
-        padding: 0.8rem 1.5rem;
-      }
-      .nav-links {
-        gap: 1rem;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-      .section-card {
-        padding: 1.5rem;
-      }
-      .portrait-card {
-        width: 160px;
-        height: 160px;
-      }
+    @media (max-width:780px){
+      .hero-grid{ grid-template-columns:1fr; text-align:center; padding:1rem; }
+      nav.nav-links{ order:3; width:100%; justify-content:center; margin-top:.5rem; }
+      .portrait-card{ width:160px; height:160px; }
     }
-    @media (max-width: 480px) {
-      .hero-text h1 {
-        font-size: 2.2rem;
-      }
-      .stat-item {
-        font-size: 0.8rem;
-        padding: 0.2rem 0.8rem;
-      }
+    @media (max-width:480px){
+      .hero-text h1{ font-size:2.2rem; }
+    }
+
+    /* prefers-reduced-motion: reduce animations for users who opt out */
+    @media (prefers-reduced-motion: reduce){
+      * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
     }
   </style>
 </head>
 <body>
-  <div class="orb orb1"></div>
-  <div class="orb orb2"></div>
-  <div class="orb orb3"></div>
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <div class="orb orb1" aria-hidden="true"></div>
+  <div class="orb orb2" aria-hidden="true"></div>
+  <div class="orb orb3" aria-hidden="true"></div>
 
   <div class="container">
-    <!-- header -->
-    <header class="glass-header">
-      <div class="logo"><i class="fas fa-bolt" style="color: #facc15; -webkit-text-fill-color: #facc15;"></i> PK DRILLER</div>
-      <div class="nav-links">
+    <header class="glass-header" role="banner">
+      <div class="logo"><i class="fas fa-bolt" style="color:var(--accent);"></i>&nbsp;PK DRILLER</div>
+
+      <nav class="nav-links" role="navigation" aria-label="Primary">
         <a href="#projects">Projects</a>
         <a href="#skills">Skills</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
-      </div>
+        <a class="btn-outline" href="/resume.pdf" download aria-label="Download resume">Resume</a>
+      </nav>
     </header>
 
-    <!-- live stats: location, battery, time, date -->
-    <div class="stats-grid" id="liveStats">
-      <div class="stat-item"><i class="fas fa-map-pin"></i> 📍 <span class="stat-value" id="locationDisplay">Kenya</span></div>
-      <div class="stat-item"><i class="fas fa-battery-three-quarters"></i> 🔋 <span class="stat-value" id="batteryDisplay">--%</span></div>
-      <div class="stat-item"><i class="fas fa-clock"></i> 🕒 <span class="stat-value" id="timeDisplay">--:--</span></div>
-      <div class="stat-item"><i class="fas fa-calendar-day"></i> 📅 <span class="stat-value" id="dateDisplay">--</span></div>
-    </div>
+    <main id="main" role="main">
+      <!-- Live stats row (aria-live) -->
+      <div id="liveStats" class="stats-grid" role="status" aria-live="polite" aria-atomic="false">
+        <div class="stat-item"><i class="fas fa-map-pin" aria-hidden="true"></i> <span class="stat-value" id="locationDisplay">Kenya 🇰🇪</span></div>
+        <div class="stat-item"><i class="fas fa-battery-three-quarters" aria-hidden="true"></i> <span class="stat-value" id="batteryDisplay">--%</span></div>
+        <div class="stat-item"><i class="fas fa-clock" aria-hidden="true"></i> <span class="stat-value" id="timeDisplay">--:--:--</span></div>
+        <div class="stat-item"><i class="fas fa-calendar-day" aria-hidden="true"></i> <span class="stat-value" id="dateDisplay">--</span></div>
+      </div>
 
-    <!-- hero + portrait -->
-    <div class="hero-grid">
-      <div class="hero-text">
-        <h1>Benard <br>Wachira</h1>
-        <p><i class="fas fa-code" style="color: #facc15;"></i> Developer · Creator · Tech storyteller from Kenya</p>
-        <p style="font-size: 0.95rem; color: #94a3b8;">Turning ideas into digital experiences with heart & energy.</p>
-        <div class="hero-cta">
-          <a href="#projects" class="btn"><i class="fas fa-rocket"></i> See Work</a>
-          <a href="#contact" class="btn btn-outline"><i class="fas fa-comment"></i> Connect</a>
+      <!-- hero -->
+      <section class="hero-grid" aria-labelledby="heroTitle">
+        <div class="hero-text">
+          <h1 id="heroTitle">Benard <br>Wachira</h1>
+          <p><i class="fas fa-code" style="color:var(--accent);" aria-hidden="true"></i> Developer · Creator · Tech storyteller from Kenya</p>
+          <p style="font-size:.95rem; color:var(--muted);">Turning ideas into digital experiences with heart & energy.</p>
+          <div class="hero-cta">
+            <a href="#projects" class="btn" aria-label="See work on this page"><i class="fas fa-rocket" aria-hidden="true"></i> See Work</a>
+            <a href="#contact" class="btn btn-outline" aria-label="Connect with me"><i class="fas fa-comment" aria-hidden="true"></i> Connect</a>
+            <a href="https://github.com/officialpkdriller?tab=repositories" class="btn" target="_blank" rel="noopener noreferrer" aria-label="View all projects on GitHub"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a>
+          </div>
         </div>
-      </div>
-      <div class="portrait-wrapper">
-        <div class="portrait-card">
-          <!-- placeholder image – using UI avatars with name -->
-          <img src="https://files.catbox.moe/klky1e.jpg">
-          <div class="flag-overlay"></div>
+
+        <div class="portrait-wrapper" aria-hidden="false">
+          <div class="portrait-card" aria-hidden="false">
+            <img src="https://files.catbox.moe/klky1e.jpg" alt="Portrait of Benard Wachira (PK Driller)" loading="lazy" width="360" height="360">
+            <div class="flag-overlay" aria-hidden="true"></div>
+          </div>
         </div>
-      </div>
-    </div>
+      </section>
 
-    <!-- projects section – single button to GitHub -->
-    <section class="section-card" id="projects">
-      <h2 class="section-title"><i class="fas fa-project-diagram"></i> Projects</h2>
-      <div class="projects-single-btn">
-        <p><i class="fas fa-github" style="color: #facc15;"></i> All my projects are on GitHub – click below to explore</p>
-        <a href="https://github.com/officialpkdriller?tab=repositories" target="_blank" class="btn">
-          <i class="fab fa-github"></i> View on GitHub
-        </a>
-      </div>
-    </section>
+      <!-- projects -->
+      <section id="projects" class="section-card" aria-labelledby="projectsTitle">
+        <h2 id="projectsTitle" class="section-title"><i class="fas fa-project-diagram" aria-hidden="true"></i> Projects</h2>
+        <div class="projects-single-btn">
+          <p><i class="fas fa-github" style="color:var(--accent);" aria-hidden="true"></i> All my projects are on GitHub — click below to explore.</p>
+          <a href="https://github.com/officialpkdriller?tab=repositories" target="_blank" rel="noopener noreferrer" class="btn" aria-label="View projects on GitHub">
+            <i class="fab fa-github" aria-hidden="true"></i> View on GitHub
+          </a>
+        </div>
+      </section>
 
-    <!-- skills -->
-    <section class="section-card" id="skills">
-      <h2 class="section-title"><i class="fas fa-cogs"></i> Skills</h2>
-      <div class="skills-wrap">
-        <span class="skill-pill">JavaScript</span>
-        <span class="skill-pill">React</span>
-        <span class="skill-pill">Node.js</span>
-        <span class="skill-pill">Python</span>
-        <span class="skill-pill">MongoDB</span>
-        <span class="skill-pill">UI/UX</span>
-        <span class="skill-pill">Git</span>
-        <span class="skill-pill">Telegram APIs</span>
-        <span class="skill-pill">Automation</span>
-        <span class="skill-pill">HTML5/CSS3</span>
-        <span class="skill-pill">REST APIs</span>
-        <span class="skill-pill">Vercel</span>
-      </div>
-    </section>
+      <!-- skills -->
+      <section id="skills" class="section-card" aria-labelledby="skillsTitle">
+        <h2 id="skillsTitle" class="section-title"><i class="fas fa-cogs" aria-hidden="true"></i> Skills</h2>
+        <div class="skills-wrap" aria-hidden="false">
+          <span class="skill-pill">JavaScript</span>
+          <span class="skill-pill">React</span>
+          <span class="skill-pill">Node.js</span>
+          <span class="skill-pill">Python</span>
+          <span class="skill-pill">MongoDB</span>
+          <span class="skill-pill">UI/UX</span>
+          <span class="skill-pill">Git</span>
+          <span class="skill-pill">Telegram APIs</span>
+          <span class="skill-pill">Automation</span>
+          <span class="skill-pill">HTML5/CSS3</span>
+          <span class="skill-pill">REST APIs</span>
+          <span class="skill-pill">Vercel</span>
+        </div>
+      </section>
 
-    <!-- about -->
-    <section class="section-card" id="about">
-      <h2 class="section-title"><i class="fas fa-user-astronaut"></i> About</h2>
-      <div class="about-text">
-        <p><strong>👋 I'm Benard Wachira (PK Driller)</strong> – a passionate developer and tech explorer from Kenya. I build web apps, bots, and creative tools that solve real problems. I believe in bold ideas, bright colours, and code that tells a story. When I'm not coding, I'm sharing knowledge and connecting with fellow makers.</p>
-        <p style="margin-top: 0.6rem;"><i class="fas fa-heart" style="color: #f472b6;"></i> Let's build something memorable together.</p>
-        <p style="margin-top: 0.4rem; font-size: 0.9rem; color: #94a3b8;"><i class="fas fa-flag" style="color: #facc15;"></i> Proudly Kenyan · 🇰🇪</p>
-      </div>
-    </section>
+      <!-- about -->
+      <section id="about" class="section-card" aria-labelledby="aboutTitle">
+        <h2 id="aboutTitle" class="section-title"><i class="fas fa-user-astronaut" aria-hidden="true"></i> About</h2>
+        <div class="about-text">
+          <p><strong>👋 I'm Benard Wachira (PK Driller)</strong> – a passionate developer and tech explorer from Kenya. I build web apps, bots, and creative tools that solve real problems. I believe in bold ideas, bright colours, and code that tells a story. When I'm not coding, I'm sharing knowledge and connecting with fellow makers.</p>
+          <p style="margin-top:.6rem;"><i class="fas fa-heart" style="color:var(--accent-2);" aria-hidden="true"></i> Let's build something memorable together.</p>
+          <p style="margin-top:.4rem; font-size:.9rem; color:var(--muted);"><i class="fas fa-flag" style="color:var(--accent);" aria-hidden="true"></i> Proudly Kenyan · 🇰🇪</p>
+        </div>
+      </section>
 
-    <!-- contact -->
-    <section class="section-card" id="contact">
-      <h2 class="section-title"><i class="fas fa-address-card"></i> Contact</h2>
-      <div class="contact-row">
-        <a href="https://github.com/officialpkdriller" class="contact-link" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-        <a href="https://wa.me/254799056874" class="contact-link" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-        <a href="https://t.me/dev_pkdrillerbot" class="contact-link" target="_blank"><i class="fab fa-telegram"></i> Telegram</a>
-        <a href="mailto:benardwachira49@gmail.com" class="contact-link"><i class="fas fa-envelope"></i> Email</a>
-        <a href="https://www.instagram.com/pk_tech01" class="contact-link" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
-      </div>
-    </section>
+      <!-- contact -->
+      <section id="contact" class="section-card" aria-labelledby="contactTitle">
+        <h2 id="contactTitle" class="section-title"><i class="fas fa-address-card" aria-hidden="true"></i> Contact</h2>
+        <div class="contact-row">
+          <a href="https://github.com/officialpkdriller" class="contact-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a>
+          <a href="https://wa.me/254799056874" class="contact-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
+          <a href="https://t.me/dev_pkdrillerbot" class="contact-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-telegram" aria-hidden="true"></i> Telegram</a>
+          <a href="mailto:benardwachira49@gmail.com" class="contact-link"><i class="fas fa-envelope" aria-hidden="true"></i> Email</a>
+          <a href="https://www.instagram.com/pk_tech01" class="contact-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram" aria-hidden="true"></i> Instagram</a>
+        </div>
+      </section>
+    </main>
 
-    <footer style="text-align: center; padding: 1.5rem 0 0.5rem; color: #475569; font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.03);">
-      <i class="fas fa-crown" style="color: #facc15;"></i> PK Driller · built with <i class="fas fa-heart" style="color: #f472b6;"></i> in Kenya
+    <footer>
+      <div><i class="fas fa-crown" style="color:var(--accent);" aria-hidden="true"></i> PK Driller · built with <i class="fas fa-heart" style="color:var(--accent-2);" aria-hidden="true"></i> in Kenya</div>
     </footer>
   </div>
 
   <script>
-    (function() {
-      // ----- 1. BATTERY + TIME + DATE -----
-      function updateTimeAndDate() {
+    (function(){
+      // Utilities for graceful fallback
+      const el = id => document.getElementById(id);
+
+      // 1) Time & Date
+      function updateTime() {
         const now = new Date();
-        const timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-        const dateStr = now.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
-        document.getElementById('timeDisplay').textContent = timeStr;
-        document.getElementById('dateDisplay').textContent = dateStr;
+        el('timeDisplay').textContent = now.toLocaleTimeString();
+        el('dateDisplay').textContent = now.toLocaleDateString(undefined, { weekday:'short', month:'short', day:'numeric', year:'numeric' });
       }
-      updateTimeAndDate();
-      setInterval(updateTimeAndDate, 1000);
+      updateTime();
+      setInterval(updateTime, 1000);
 
-      // battery
-      if ('getBattery' in navigator) {
-        navigator.getBattery().then(battery => {
-          function updateBattery() {
-            const level = Math.round(battery.level * 100);
-            document.getElementById('batteryDisplay').textContent = level + '%';
-          }
-          updateBattery();
-          battery.addEventListener('levelchange', updateBattery);
-          battery.addEventListener('chargingchange', updateBattery);
-        }).catch(() => {
-          document.getElementById('batteryDisplay').textContent = 'N/A';
-        });
+      // 2) Battery API (graceful)
+      function setBatteryText(text){ if(el('batteryDisplay')) el('batteryDisplay').textContent = text; }
+      if (navigator.getBattery) {
+        navigator.getBattery().then(bat => {
+          const update = () => setBatteryText(Math.round(bat.level * 100) + (bat.charging ? ' ⚡' : '%'));
+          update();
+          bat.addEventListener('levelchange', update);
+          bat.addEventListener('chargingchange', update);
+        }).catch(()=> setBatteryText('N/A'));
       } else {
-        document.getElementById('batteryDisplay').textContent = 'N/A';
+        // Some browsers expose navigator.battery or don't support battery at all.
+        if (navigator.battery && typeof navigator.battery.level === 'number') {
+          try { setBatteryText(Math.round(navigator.battery.level * 100) + '%'); } catch(e){ setBatteryText('N/A'); }
+        } else {
+          setBatteryText('N/A');
+        }
       }
 
-      // ----- 2. LOCATION via Geolocation (Google Maps style) -----
-      function updateLocation(position) {
-        const { latitude, longitude } = position.coords;
-        // Reverse geocode using OpenStreetMap (free, no key)
+      // 3) Geolocation -> reverse geocode with OSM (free). If user declines, fallback to "Kenya"
+      function setLocationFromCoords({ coords }) {
+        const { latitude, longitude } = coords;
         fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json&zoom=10`)
-          .then(res => res.json())
+          .then(r => r.json())
           .then(data => {
-            const address = data.address || {};
-            const city = address.city || address.town || address.village || address.county || 'Kenya';
-            const country = address.country || 'Kenya';
-            document.getElementById('locationDisplay').textContent = `${city}, ${country}`;
+            const addr = data.address || {};
+            const city = addr.city || addr.town || addr.village || addr.county || '';
+            const country = addr.country || 'Kenya';
+            el('locationDisplay').textContent = city ? `${city}, ${country}` : `${country}`;
           })
-          .catch(() => {
-            document.getElementById('locationDisplay').textContent = 'Kenya 🇰🇪';
-          });
+          .catch(()=> { el('locationDisplay').textContent = 'Kenya 🇰🇪'; });
       }
-      function locationError() {
-        document.getElementById('locationDisplay').textContent = 'Kenya 🇰🇪';
-      }
-      if ('geolocation' in navigator) {
-        navigator.geolocation.getCurrentPosition(updateLocation, locationError, { timeout: 6000, enableHighAccuracy: true });
-      } else {
-        document.getElementById('locationDisplay').textContent = 'Kenya 🇰🇪';
-      }
+      function setLocationFallback(){ if(el('locationDisplay')) el('locationDisplay').textContent = 'Kenya 🇰🇪'; }
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(setLocationFromCoords, setLocationFallback, { timeout:7000, maximumAge:300000, enableHighAccuracy:false });
+      } else setLocationFallback();
 
-      // ----- 3. portrait rotation + flag overlay: all in CSS -----
-      // everything is handled by CSS animations (rotatePortrait + flagShift)
+      // tidy: remove any inline widths if portrait missing (not necessary)
     })();
   </script>
 </body>
